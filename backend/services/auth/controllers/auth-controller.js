@@ -221,18 +221,19 @@ import userModel from "../models/user-model.js";
 import crypto from "crypto";
 import redis from "../../../shared/redis/redis.js";
 
-const SESSION_EXPIRY = 7 * 24 * 60 * 60;
 
-const isProduction = process.env.NODE_ENV === "production";
+
+
+
+const SESSION_EXPIRY = 7 * 24 * 60 * 60;
 
 const cookieOptions = {
   httpOnly: true,
-  secure: isProduction,
-  sameSite: isProduction ? "none" : "lax",
+  secure: true,
+  sameSite: "none",
   maxAge: SESSION_EXPIRY * 1000,
   path: "/",
 };
-
 // LOGIN
 export const login = async (req, res) => {
   try {
@@ -353,13 +354,12 @@ export const logOut = async (req, res) => {
       await redis.del(`session:${sessionId}`);
     }
 
-    res.clearCookie("session", {
-      httpOnly: true,
-      secure: isProduction,
-      sameSite: isProduction ? "none" : "lax",
-      path: "/",
-    });
-
+  res.clearCookie("session", {
+  httpOnly: true,
+  secure: true,
+  sameSite: "none",
+  path: "/",
+});
     return res.status(200).json({
       success: true,
       message: "Logout successfully",
