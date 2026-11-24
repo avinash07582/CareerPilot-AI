@@ -28,7 +28,7 @@ const PORT =process.env.PORT ||6000
 app.get("/",(req,res)=>{
     return res.status(200).json({message:"hello from gate way"})
 })
-
+app.get("/api/me", isAuth, getCurrentUser);
 
 if (process.env.AUTH_SERVICE_URL) {
   app.use("/api/auth", proxy(process.env.AUTH_SERVICE_URL));
