@@ -2,7 +2,7 @@ import { useRef } from 'react'
 import { motion } from "motion/react"
 import { FiArrowLeft, FiAward, FiCheck, FiTarget, FiTrendingUp, FiX } from 'react-icons/fi'
 import { useNavigate } from 'react-router-dom'
-import DownloadBtn from '../resume/DownloadBtn'
+import DownloadBtn from '../resume/Downloadbtn'
 function Step3report({ report, user, setUser }) {
   const navigate = useNavigate()
   const reportRef = useRef(null)

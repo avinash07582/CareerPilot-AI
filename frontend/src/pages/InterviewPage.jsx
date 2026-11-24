@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import { useState } from "react"
-import { replace, useNavigate, useParams } from "react-router-dom"
+import {useNavigate, useParams } from "react-router-dom"
 import { getInterview } from "../../apis/interview.api.js"
 import Step2Interview from "../components/interview/Step2Interview.jsx"
 
