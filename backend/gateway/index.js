@@ -29,12 +29,26 @@ app.get("/",(req,res)=>{
     return res.status(200).json({message:"hello from gate way"})
 })
 
-app.use("/api/auth",proxy(process.env.AUTH_SERVICE_URL))
-app.get("/api/me",isAuth,getCurrentUser)
-app.use("/api/resume",isAuth,proxyWithHeaders(process.env.RESUME_SERVICE_URL))
- app.use("/api/interview" ,isAuth,proxyWithHeaders(process.env.INTERVIEW_SERVICE_URL))
- app.use("/api/roadmap" ,isAuth,proxyWithHeaders(process.env.ROADMAP_SERVICE_URL))
- app.use("/api/billing" ,isAuth,proxyWithHeaders(process.env.BILLING_SERVICE_URL))
+
+if (process.env.AUTH_SERVICE_URL) {
+  app.use("/api/auth", proxy(process.env.AUTH_SERVICE_URL));
+}
+
+if (process.env.RESUME_SERVICE_URL) {
+  app.use("/api/resume", isAuth, proxyWithHeaders(process.env.RESUME_SERVICE_URL));
+}
+
+if (process.env.INTERVIEW_SERVICE_URL) {
+  app.use("/api/interview", isAuth, proxyWithHeaders(process.env.INTERVIEW_SERVICE_URL));
+}
+
+if (process.env.ROADMAP_SERVICE_URL) {
+  app.use("/api/roadmap", isAuth, proxyWithHeaders(process.env.ROADMAP_SERVICE_URL));
+}
+
+if (process.env.BILLING_SERVICE_URL) {
+  app.use("/api/billing", isAuth, proxyWithHeaders(process.env.BILLING_SERVICE_URL));
+}
 
 
 
